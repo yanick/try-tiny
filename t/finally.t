@@ -3,7 +3,7 @@
 use strict;
 #use warnings;
 
-use Test::More tests => 11;
+use Test::More tests => 12;
 
 BEGIN { use_ok 'Try::Tiny' };
 
@@ -56,5 +56,10 @@ try {
   }
 };
 
+try {
+  die("Die\n");
+} finally {
+  is_deeply(\@_, [ "Die\n" ], "finally got passed the exception");
+};
 
 1;
