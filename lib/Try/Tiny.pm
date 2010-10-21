@@ -29,7 +29,7 @@ sub try (&;@) {
 	# to $failed
 	my $wantarray = wantarray;
 
-	my ( $catch, $finally );
+	my ( $catch, @finally );
 
 	# find labeled blocks in the argument list.
 	# catch and finally tag the blocks by blessing a scalar reference to them.
@@ -41,7 +41,7 @@ sub try (&;@) {
 		if ( $ref eq 'Try::Tiny::Catch' ) {
 			$catch = ${$code_ref};
 		} elsif ( $ref eq 'Try::Tiny::Finally' ) {
-			$finally = ${$code_ref};
+			push @finally, ${$code_ref};
 		} else {
 			use Carp;
 			confess("Unknown code ref type given '${ref}'. Check your usage & try again");
@@ -85,7 +85,9 @@ sub try (&;@) {
 	}
 
 	# set up a scope guard to invoke the finally block at the end
-	my $guard = $finally && bless \$finally, "Try::Tiny::ScopeGuard";
+	my @guards =
+    map { Try::Tiny::ScopeGuard->_new($_, $failed ? $error : ()) }
+    @finally;
 
 	# at this point $failed contains a true value if the eval died, even if some
 	# destructor overwrote $@ as the eval was unwinding.
@@ -127,9 +129,19 @@ sub finally (&;@) {
 	);
 }
 
-sub Try::Tiny::ScopeGuard::DESTROY {
-	my $self = shift;
-	$$self->();
+{
+  package Try::Tiny::ScopeGuard;
+
+  sub _new {
+    shift;
+    bless [ @_ ];
+  }
+
+  sub DESTROY {
+    my @guts = @{ shift() };
+    my $code = shift @guts;
+    $code->(@guts);
+  }
 }
 
 __PACKAGE__
@@ -192,7 +204,8 @@ You can add finally blocks making the following true.
 	try { die 'foo' } catch { warn "Got a die: $_" } finally { $x = 'bar' };
 
 Finally blocks are always executed making them suitable for cleanup code
-which cannot be handled using local.
+which cannot be handled using local.  You can add as many finaly blocks to a
+given try block as you like.
 
 =head1 EXPORTS
 
