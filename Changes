@@ -1,3 +1,7 @@
+0.07
+  - allow multiple finally blocks
+  - pass the error, if any, to finally blocks when called
+
 0.06
 	- in t/given_when.t use a plan instead of done_testing for more backwards
 	  compatibility
