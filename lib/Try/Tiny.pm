@@ -204,7 +204,7 @@ You can add finally blocks making the following true.
 	try { die 'foo' } catch { warn "Got a die: $_" } finally { $x = 'bar' };
 
 Finally blocks are always executed making them suitable for cleanup code
-which cannot be handled using local.  You can add as many finaly blocks to a
+which cannot be handled using local.  You can add as many finally blocks to a
 given try block as you like.
 
 =head1 EXPORTS
