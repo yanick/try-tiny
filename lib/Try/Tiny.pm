@@ -280,6 +280,22 @@ executed in the event of a successful C<try> or if C<catch> is run. This allows
 you to locate cleanup code which cannot be done via C<local()> e.g. closing a file
 handle.
 
+When invoked, the finally block is passed the error that was caught.  If no
+error was caught, it is passed nothing.  In other words, the following code
+does just what you would expect:
+
+  try {
+    die_sometimes();
+  } catch {
+    # ...code run in case of error
+  } finally {
+    if (@_) {
+      print "The try block died with: @_\n";
+    } else {
+      print "The try block ran without error.\n";
+    }
+  };
+
 B<You must always do your own error handling in the finally block>. C<Try::Tiny> will
 not do anything about handling possible errors coming from code located in these
 blocks.
