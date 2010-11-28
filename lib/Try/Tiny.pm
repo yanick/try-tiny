@@ -130,7 +130,8 @@ sub finally (&;@) {
 }
 
 {
-  package Try::Tiny::ScopeGuard;
+  package # hide from PAUSE
+    Try::Tiny::ScopeGuard;
 
   sub _new {
     shift;
