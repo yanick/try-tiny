@@ -1,3 +1,6 @@
+0.09
+  - don't index Try::Tiny::ScopeGuard
+
 0.08
   - fix require vs use issue in blead (RT63410)
 
