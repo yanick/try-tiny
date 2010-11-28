@@ -1,3 +1,6 @@
+0.08
+  - fix require vs use issue in blead (RT63410)
+
 0.07
   - allow multiple finally blocks
   - pass the error, if any, to finally blocks when called
