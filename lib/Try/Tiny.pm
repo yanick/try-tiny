@@ -157,12 +157,19 @@ Try::Tiny - minimal try/catch with proper localization of $@
 
 =head1 SYNOPSIS
 
+You can use Try::Tiny's C<try> and C<catch> to expect and handle exceptional
+conditions, avoiding quirks in Perl and common mistakes:
+
 	# handle errors with a catch handler
 	try {
 		die "foo";
 	} catch {
 		warn "caught error: $_"; # not $@
 	};
+
+You can also use it like a stanalone C<eval> to catch and ignore any error
+conditions.  Obviously, this is an extreme measure not to be undertaken
+lightly:
 
 	# just silence errors
 	try {
