@@ -289,8 +289,10 @@ you to locate cleanup code which cannot be done via C<local()> e.g. closing a fi
 handle.
 
 When invoked, the finally block is passed the error that was caught.  If no
-error was caught, it is passed nothing.  In other words, the following code
-does just what you would expect:
+error was caught, it is passed nothing.  (Note that the finally block does not
+localize C<$_> with the error, since unlike in a catch block, there is no way
+to know if C<$_ == undef> implies that there were no errors.) In other words,
+the following code does just what you would expect:
 
   try {
     die_sometimes();

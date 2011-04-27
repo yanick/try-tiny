@@ -3,7 +3,7 @@
 use strict;
 #use warnings;
 
-use Test::More tests => 13;
+use Test::More tests => 24;
 
 BEGIN { use_ok 'Try::Tiny' };
 
@@ -74,4 +74,31 @@ try {
     };
 };
 
+$_ = "foo";
+try {
+    is($_, "foo", "not localized in try");
+}
+catch {
+}
+finally {
+    is(scalar(@_), 0, "nothing in \@_ (finally)");
+    is($_, "foo", "\$_ not localized (finally)");
+};
+is($_, "foo", "same afterwards");
+
+$_ = "foo";
+try {
+    is($_, "foo", "not localized in try");
+    die "bar\n";
+}
+catch {
+    is($_[0], "bar\n", "error in \@_ (catch)");
+    is($_, "bar\n", "error in \$_ (catch)");
+}
+finally {
+    is(scalar(@_), 1, "error in \@_ (finally)");
+    is($_[0], "bar\n", "error in \@_ (finally)");
+    is($_, "foo", "\$_ not localized (finally)");
+};
+is($_, "foo", "same afterwards");
 1;
