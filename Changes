@@ -1,3 +1,6 @@
+0.10
+  - clarify some docs
+
 0.09
   - don't index Try::Tiny::ScopeGuard
 
