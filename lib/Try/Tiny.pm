@@ -455,12 +455,32 @@ or
 C<return> returns from the C<try> block, not from the parent sub (note that
 this is also how C<eval> works, but not how L<TryCatch> works):
 
-	sub bar {
-		try { return "foo" };
-		return "baz";
-	}
+  sub parent_sub {
+      try {
+          die;
+      }
+      catch {
+          return;
+      };
 
-	say bar(); # "baz"
+      say "this text WILL be displayed, even though an exception is thrown";
+  }
+
+Instead, you should capture the return value:
+
+  sub parent_sub {
+      my $success = try {
+          die;
+          1;
+      }
+      return unless $success;
+
+      say "This text WILL NEVER appear!";
+  }
+
+Note that if you have a catch block, it must return undef for this to work,
+since if a catch block exists, its return value is returned in place of undef
+when an exception is thrown.
 
 =item *
 
