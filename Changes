@@ -5,6 +5,8 @@
   - proper exception on erroneous usage of bare catch/finally (RT#81070)
   - proper exception on erroneous use of multiple catch{} blocks
   - clarify exception occuring on unterminated try block (RT#75712)
+  - fix the prototypes shown in docs to match code (RT#79590; thanks, Pushtaev
+    Vadim)
 
 0.12
   - doc fixes
