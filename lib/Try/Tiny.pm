@@ -198,10 +198,12 @@ of error values (simple strings, references, objects, overloaded objects, etc).
 
 If the try block dies, it returns the value of the last statement executed in
 the catch block, if there is one. Otherwise, it returns C<undef> in scalar
-context or the empty list in list context. The following two examples both
+context or the empty list in list context. The following examples all
 assign C<"bar"> to C<$x>.
 
 	my $x = try { die "foo" } catch { "bar" };
+	my $x = try { die "foo" } || { "bar" };
+	my $x = (try { die "foo" }) // { "bar" };
 
 	my $x = eval { die "foo" } || "bar";
 
