@@ -10,8 +10,7 @@ BEGIN {
   plan tests => 6;
 }
 
-
-BEGIN { use_ok 'Try::Tiny' }
+use Try::Tiny;
 
 use 5.010;
 no if $] >= 5.017011, warnings => 'experimental::smartmatch';

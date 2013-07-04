@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More tests => 28;
 
-BEGIN { use_ok 'Try::Tiny' };
+use Try::Tiny;
 
 try {
   my $a = 1+1;

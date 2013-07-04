@@ -8,8 +8,9 @@ use Test::More;
 BEGIN {
   plan skip_all => "Perl 5.10 is required" unless eval { require 5.010 };
   plan tests => 3;
-  use_ok("Try::Tiny");
 }
+
+use Try::Tiny;
 
 use 5.010;
 no if $] >= 5.017011, warnings => 'experimental::smartmatch';

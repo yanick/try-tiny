@@ -3,17 +3,14 @@ use warnings;
 
 use Test::More;
 
-BEGIN {
-  plan tests =>
-    1         # use_ok
-  + (4+1) * 2 # list/scalar with exception (try + catch + 2 x finally) + is_deeply
-  + 4         # void with exception
-  + (3+1) * 2 # list/scalar no exception (try + 2 x finally) + is_deeply
-  + 3         # void no exception
-  ;
+use Try::Tiny;
 
-  use_ok 'Try::Tiny';
-}
+plan tests =>
+  (4+1) * 2 # list/scalar with exception (try + catch + 2 x finally) + is_deeply
++ 4         # void with exception
++ (3+1) * 2 # list/scalar no exception (try + 2 x finally) + is_deeply
++ 3         # void no exception
+;
 
 my $ctx_index = {
   VOID => undef,

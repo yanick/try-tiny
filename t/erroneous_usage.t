@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 6;
+
 use Try::Tiny;
 
 sub _eval {

@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More tests => 26;
 
-BEGIN { use_ok 'Try::Tiny' };
+use Try::Tiny;
 
 sub _eval {
   local $@;
