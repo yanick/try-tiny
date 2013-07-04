@@ -6,8 +6,8 @@ use strict;
 use Test::More;
 
 BEGIN {
-	plan skip_all => "Perl 5.10 required" unless eval { require 5.010; 1 };
-	plan tests => 6;
+  plan skip_all => "Perl 5.10 required" unless eval { require 5.010; 1 };
+  plan tests => 6;
 }
 
 
@@ -20,14 +20,14 @@ my ( $foo, $bar, $other );
 $_ = "magic";
 
 try {
-	die "foo";
+  die "foo";
 } catch {
 
-	like( $_, qr/foo/ );
+  like( $_, qr/foo/ );
 
-	when (/bar/) { $bar++ };
-	when (/foo/) { $foo++ };
-	default { $other++ };
+  when (/bar/) { $bar++ };
+  when (/foo/) { $foo++ };
+  default { $other++ };
 };
 
 is( $_, "magic", '$_ not clobbered' );
