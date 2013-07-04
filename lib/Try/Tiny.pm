@@ -602,7 +602,7 @@ issues with C<$@>, but you still need to localize to prevent clobbering.
 I gave a lightning talk about this module, you can see the slides (Firefox
 only):
 
-L<web.archive.org/web/20100628040134/http://nothingmuch.woobling.org/talks/takahashi.xul>
+L<http://web.archive.org/web/20100628040134/http://nothingmuch.woobling.org/talks/takahashi.xul>
 
 Or read the source:
 
