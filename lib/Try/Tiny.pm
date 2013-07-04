@@ -1,10 +1,9 @@
 package Try::Tiny;
+use 5.006;
+# ABSTRACT: minimal try/catch with proper preservation of $@
 
 use strict;
 use warnings;
-
-our $VERSION = "0.12";
-$VERSION = eval $VERSION if $VERSION =~ /_/;
 
 use base 'Exporter';
 our @EXPORT = our @EXPORT_OK = qw(try catch finally);
@@ -160,10 +159,6 @@ __PACKAGE__
 __END__
 
 =pod
-
-=head1 NAME
-
-Try::Tiny - minimal try/catch with proper preservation of $@
 
 =head1 SYNOPSIS
 
@@ -611,16 +606,6 @@ L<http://web.archive.org/web/20100305133605/http://nothingmuch.woobling.org/talk
 =head1 VERSION CONTROL
 
 L<http://github.com/nothingmuch/try-tiny/>
-
-=head1 AUTHOR
-
-Yuval Kogman E<lt>nothingmuch@woobling.orgE<gt>
-
-=head1 COPYRIGHT
-
-  Copyright (c) 2009 Yuval Kogman. All rights reserved.
-  This program is free software; you can redistribute
-  it and/or modify it under the terms of the MIT license.
 
 =cut
 

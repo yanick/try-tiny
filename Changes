@@ -1,4 +1,6 @@
+Revision history for Try-Tiny
 
+{{$NEXT}}
   - fix tests failing on 5.6.x due to differing DESTROY semantics
   - excise superfluous local($@) call - 7% speedup
   - fix (fsvo) broken URLs (RT#55659)
@@ -8,6 +10,7 @@
   - fix the prototypes shown in docs to match code (RT#79590; thanks, Pushtaev
     Vadim)
   - warn loudly on exceptions in finally() blocks
+  - dzilify
 
 0.12
   - doc fixes
