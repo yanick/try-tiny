@@ -28,18 +28,19 @@ sub try (&;@) {
   # find labeled blocks in the argument list.
   # catch and finally tag the blocks by blessing a scalar reference to them.
   foreach my $code_ref (@code_refs) {
-    next unless $code_ref;
 
-    my $ref = ref($code_ref);
-
-    if ( $ref eq 'Try::Tiny::Catch' ) {
+    if ( ref($code_ref) eq 'Try::Tiny::Catch' ) {
       croak 'A try() may not be followed by multiple catch() blocks'
         if $catch;
       $catch = ${$code_ref};
-    } elsif ( $ref eq 'Try::Tiny::Finally' ) {
+    } elsif ( ref($code_ref) eq 'Try::Tiny::Finally' ) {
       push @finally, ${$code_ref};
     } else {
-      confess("Unknown code ref type given '${ref}'. Check your usage & try again");
+      croak(
+        'try() encountered an unexpected argument ('
+      . ( defined $code_ref ? $code_ref : 'undef' )
+      . ') - perhaps a missing semi-colon before or'
+      );
     }
   }
 

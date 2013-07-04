@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Try::Tiny;
 
 sub _eval {
@@ -46,3 +46,9 @@ throws_ok {
   try { 1 } catch { 2 } catch { 3 } finally { 4 } finally { 5 }
 } qr/\QA try() may not be followed by multiple catch() blocks/, 'Multi-catch detected';
 
+
+throws_ok {
+  try { 1 } catch { 2 }
+  do { 2 }
+} qr/\Qtry() encountered an unexpected argument (2) - perhaps a missing semi-colon before or at/,
+  'Unterminated try detected';
