@@ -69,9 +69,10 @@ sub try (&;@) {
     };
 
     return 1; # properly set $fail to false
-  } and $error = $@;
+  };
 
-  # reset the original value of $@
+  # preserve the current error and reset the original value of $@
+  $error = $@;
   $@ = $prev_error;
 
   # set up a scope guard to invoke the finally block at the end
