@@ -30,7 +30,8 @@ given ("foo") {
 is( $error, "blah\n", "error caught" );
 
 {
-  local $TODO = "perhaps a workaround can be found";
+  local $TODO = "perhaps a workaround can be found"
+    if $] < 5.017003;
   is( $topic, $error, 'error is also in $_' );
 }
 

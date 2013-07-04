@@ -533,6 +533,12 @@ confusing behavior:
     }
   }
 
+Note that this behavior was changed once again in L<Perl5 version 18
+|https://metacpan.org/module/perldelta#given-now-aliases-the-global-_>.
+However, since the entirety of lexical C<$_> is now L<considired experimental
+|https://metacpan.org/module/perldelta#Lexical-_-is-now-experimental>, it
+is unclear whether the new version 18 behavior is final.
+
 =back
 
 =head1 SEE ALSO
