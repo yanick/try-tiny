@@ -33,6 +33,8 @@ sub try (&;@) {
     my $ref = ref($code_ref);
 
     if ( $ref eq 'Try::Tiny::Catch' ) {
+      croak 'A try() may not be followed by multiple catch() blocks'
+        if $catch;
       $catch = ${$code_ref};
     } elsif ( $ref eq 'Try::Tiny::Finally' ) {
       push @finally, ${$code_ref};
@@ -101,6 +103,8 @@ sub try (&;@) {
 sub catch (&;@) {
   my ( $block, @rest ) = @_;
 
+  croak 'Useless bare catch()' unless defined wantarray;
+
   return (
     bless(\$block, 'Try::Tiny::Catch'),
     @rest,
@@ -109,6 +113,8 @@ sub catch (&;@) {
 
 sub finally (&;@) {
   my ( $block, @rest ) = @_;
+
+  croak 'Useless bare finally()' unless defined wantarray;
 
   return (
     bless(\$block, 'Try::Tiny::Finally'),
