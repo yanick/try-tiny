@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 24;
+use Test::More tests => 28;
 
 BEGIN { use_ok 'Try::Tiny' };
 
@@ -101,4 +101,31 @@ finally {
   is($_, "foo", "\$_ not localized (finally)");
 };
 is($_, "foo", "same afterwards");
+
+{
+  my @warnings;
+  local $SIG{__WARN__} = sub {
+    $_[0] =~ /\QExecution of finally() block CODE(0x\E.+\Q) resulted in an exception/
+      ? push @warnings, @_
+      : warn @_
+  };
+
+  try {
+    die 'tring'
+  } finally {
+    die 'fin 1'
+  } finally {
+    pass('fin 2 called')
+  } finally {
+    die 'fin 3'
+  };
+
+  is( scalar @warnings, 2, 'warnings from both fatal finally blocks' );
+
+  my @originals = sort map { $_ =~ /Original exception text follows:\n\n(.+)/s } @warnings;
+
+  like $originals[0], qr/fin 1 at/, 'First warning contains original exception';
+  like $originals[1], qr/fin 3 at/, 'Second warning contains original exception';
+}
+
 1;

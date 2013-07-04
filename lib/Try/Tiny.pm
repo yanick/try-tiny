@@ -127,15 +127,30 @@ sub finally (&;@) {
   package # hide from PAUSE
     Try::Tiny::ScopeGuard;
 
+  use constant UNSTABLE_DOLLARAT => ($] < '5.013002') ? 1 : 0;
+
   sub _new {
     shift;
     bless [ @_ ];
   }
 
   sub DESTROY {
-    my @guts = @{ shift() };
-    my $code = shift @guts;
-    $code->(@guts);
+    my ($code, @args) = @{ $_[0] };
+
+    local $@ if UNSTABLE_DOLLARAT;
+    eval {
+      $code->(@args);
+      1;
+    } or do {
+      warn
+        "Execution of finally() block $code resulted in an exception, which "
+      . '*CAN NOT BE PROPAGATED* due to fundamental limitations of Perl. '
+      . 'Your program will continue as if this event never took place. '
+      . "Original exception text follows:\n\n"
+      . (defined $@ ? $@ : '$@ left undefined...')
+      . "\n"
+      ;
+    }
   }
 }
 
@@ -305,6 +320,11 @@ the following code does just what you would expect:
 B<You must always do your own error handling in the C<finally> block>. C<Try::Tiny> will
 not do anything about handling possible errors coming from code located in these
 blocks.
+
+Furthermore B<exceptions in C<finally> blocks are not trappable and are unable
+to influence the execution of your program>. This is due to limitation of
+C<DESTROY>-based scope guards, which C<finally> is implemented on top of. This
+may change in a future version of Try::Tiny.
 
 In the same way C<catch()> blesses the code reference this subroutine does the same
 except it bless them as C<Try::Tiny::Finally>.

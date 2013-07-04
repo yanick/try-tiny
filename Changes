@@ -7,6 +7,7 @@
   - clarify exception occuring on unterminated try block (RT#75712)
   - fix the prototypes shown in docs to match code (RT#79590; thanks, Pushtaev
     Vadim)
+  - warn loudly on exceptions in finally() blocks
 
 0.12
   - doc fixes
