@@ -41,41 +41,35 @@ sub try (&;@) {
     }
   }
 
-  # save the value of $@ so we can set $@ back to it in the beginning of the eval
-  my $prev_error = $@;
-
-  my ( @ret, $error, $failed );
-
   # FIXME consider using local $SIG{__DIE__} to accumulate all errors. It's
   # not perfect, but we could provide a list of additional errors for
   # $catch->();
 
-  {
-    # localize $@ to prevent clobbering of previous value by a successful
-    # eval.
-    local $@;
+  # save the value of $@ so we can set $@ back to it in the beginning of the eval
+  # and restore $@ after the eval finishes
+  my $prev_error = $@;
 
-    # failed will be true if the eval dies, because 1 will not be returned
-    # from the eval body
-    $failed = not eval {
-      $@ = $prev_error;
+  my ( @ret, $error );
 
-      # evaluate the try block in the correct context
-      if ( $wantarray ) {
-        @ret = $try->();
-      } elsif ( defined $wantarray ) {
-        $ret[0] = $try->();
-      } else {
-        $try->();
-      };
+  # failed will be true if the eval dies, because 1 will not be returned
+  # from the eval body
+  my $failed = not eval {
+    $@ = $prev_error;
 
-      return 1; # properly set $fail to false
+    # evaluate the try block in the correct context
+    if ( $wantarray ) {
+      @ret = $try->();
+    } elsif ( defined $wantarray ) {
+      $ret[0] = $try->();
+    } else {
+      $try->();
     };
 
-    # copy $@ to $error; when we leave this scope, local $@ will revert $@
-    # back to its previous value
-    $error = $@;
-  }
+    return 1; # properly set $fail to false
+  } and $error = $@;
+
+  # reset the original value of $@
+  $@ = $prev_error;
 
   # set up a scope guard to invoke the finally block at the end
   my @guards =
@@ -146,7 +140,7 @@ __END__
 
 =head1 NAME
 
-Try::Tiny - minimal try/catch with proper localization of $@
+Try::Tiny - minimal try/catch with proper preservation of $@
 
 =head1 SYNOPSIS
 
@@ -329,8 +323,9 @@ More specifically, C<$@> is clobbered at the beginning of the C<eval>, which
 also makes it impossible to capture the previous error before you die (for
 instance when making exception objects with error stacks).
 
-For this reason C<try> will actually set C<$@> to its previous value (before
-the localization) in the beginning of the C<eval> block.
+For this reason C<try> will actually set C<$@> to its previous value (the one
+available before entering the C<try> block) in the beginning of the C<eval>
+block.
 
 =head2 Localizing $@ silently masks errors
 
