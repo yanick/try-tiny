@@ -1,3 +1,6 @@
+
+  - fix tests failing on 5.6.x due to differing DESTROY semantics
+
 0.12
   - doc fixes
 
