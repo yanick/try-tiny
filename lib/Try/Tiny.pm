@@ -605,7 +605,7 @@ L<http://web.archive.org/web/20100305133605/http://nothingmuch.woobling.org/talk
 
 =head1 VERSION CONTROL
 
-L<http://github.com/nothingmuch/try-tiny/>
+L<http://github.com/doy/try-tiny/>
 
 =cut
 
