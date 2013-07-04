@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+
+0.13  2013-07-04
   - fix tests failing on 5.6.x due to differing DESTROY semantics
   - excise superfluous local($@) call - 7% speedup
   - fix (fsvo) broken URLs (RT#55659)
