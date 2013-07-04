@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
-#use warnings;
+use warnings;
 
 use Test::More;
 
@@ -14,6 +14,7 @@ BEGIN {
 BEGIN { use_ok 'Try::Tiny' }
 
 use 5.010;
+no if $] >= 5.017011, warnings => 'experimental::smartmatch';
 
 my ( $foo, $bar, $other );
 

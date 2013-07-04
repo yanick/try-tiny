@@ -1,21 +1,15 @@
 package Try::Tiny;
 
 use strict;
-#use warnings;
+use warnings;
 
-use vars qw(@EXPORT @EXPORT_OK $VERSION @ISA);
+our $VERSION = "0.12";
+$VERSION = eval $VERSION if $VERSION =~ /_/;
 
-BEGIN {
-  require Exporter;
-  @ISA = qw(Exporter);
-}
+use base 'Exporter';
+our @EXPORT = our @EXPORT_OK = qw(try catch finally);
 
-$VERSION = "0.12";
-
-$VERSION = eval $VERSION;
-
-@EXPORT = @EXPORT_OK = qw(try catch finally);
-
+use Carp;
 $Carp::Internal{+__PACKAGE__}++;
 
 # Need to prototype as @ not $$ because of the way Perl evaluates the prototype.
@@ -43,7 +37,6 @@ sub try (&;@) {
     } elsif ( $ref eq 'Try::Tiny::Finally' ) {
       push @finally, ${$code_ref};
     } else {
-      use Carp;
       confess("Unknown code ref type given '${ref}'. Check your usage & try again");
     }
   }

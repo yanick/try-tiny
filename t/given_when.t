@@ -12,6 +12,7 @@ BEGIN {
 }
 
 use 5.010;
+no if $] >= 5.017011, warnings => 'experimental::smartmatch';
 
 my ( $error, $topic );
 
