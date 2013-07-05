@@ -104,7 +104,7 @@ sub try (&;@) {
 sub catch (&;@) {
   my ( $block, @rest ) = @_;
 
-  croak 'Useless bare catch()' unless defined wantarray;
+  croak 'Useless bare catch()' unless wantarray;
 
   return (
     bless(\$block, 'Try::Tiny::Catch'),
@@ -115,7 +115,7 @@ sub catch (&;@) {
 sub finally (&;@) {
   my ( $block, @rest ) = @_;
 
-  croak 'Useless bare finally()' unless defined wantarray;
+  croak 'Useless bare finally()' unless wantarray;
 
   return (
     bless(\$block, 'Try::Tiny::Finally'),

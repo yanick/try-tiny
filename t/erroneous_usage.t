@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
+use Test::More tests => 8;
 
 use Try::Tiny;
 
@@ -53,3 +53,25 @@ throws_ok {
   do { 2 }
 } qr/\Qtry() encountered an unexpected argument (2) - perhaps a missing semi-colon before or at/,
   'Unterminated try detected';
+
+sub foo {
+  try { 0 }; catch { 2 }
+}
+
+throws_ok {
+  if (foo()) {
+    # ...
+  }
+} qr/\QUseless bare catch/,
+  'Bare catch at the end of a function call';
+
+sub bar {
+  try { 0 }; finally { 2 }
+}
+
+throws_ok {
+  if (bar()) {
+    # ...
+  }
+} qr/\QUseless bare finally/,
+  'Bare finally at the end of a function call';
