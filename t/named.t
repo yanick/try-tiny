@@ -17,7 +17,7 @@ my $name;
 try {
 	$name = (caller(0))[3];
 };
-is $name, "main::try {...}", "try name";
+is $name, "main::try {...} ", "try name"; # note extra space
 
 try {
 	die "Boom";

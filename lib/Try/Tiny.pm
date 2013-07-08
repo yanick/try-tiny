@@ -51,7 +51,7 @@ sub try (&;@) {
 
   # name the blocks if we have Sub::Name installed
   my $caller = caller;
-  subname("${caller}::try {...}" => $try);
+  subname("${caller}::try {...} " => $try);
   subname("${caller}::catch {...} " => $catch) if $catch;
   subname("${caller}::finally {...} " => $_) foreach @finally;
 
