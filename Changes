@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+  - optionally use Sub::Name to name the try/catch/finally blocks, if available
+    (Mark Fowler)
 
 0.14  2013-07-05
   - also throw an exception for catch/finally in scalar context (RT#81070)
