@@ -1,6 +1,7 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+  - remove accidental Sub::Name test dep
 
 0.15  2013-07-08
   - optionally use Sub::Name to name the try/catch/finally blocks, if available
