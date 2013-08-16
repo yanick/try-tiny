@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+  - work around [rt.perl #119311] which was causing incorrect error messages in
+    some cases during global destruction (Graham Knop, #9)
 
 0.16  2013-07-10
   - remove accidental Sub::Name test dep
