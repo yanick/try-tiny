@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+
+0.17  2013-08-16
   - work around [rt.perl #119311] which was causing incorrect error messages in
     some cases during global destruction (Graham Knop, #9)
 
