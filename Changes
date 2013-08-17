@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+
+0.18  2013-08-17
   - fix tests for pre-Test-More-0.88 (Paul Howarth, #10)
 
 0.17  2013-08-16
