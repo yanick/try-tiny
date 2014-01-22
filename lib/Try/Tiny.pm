@@ -500,9 +500,7 @@ Instead, you should capture the return value:
 
     say "This text WILL NEVER appear!";
   }
-  
-  # or
-  
+  # OR
   sub parent_sub_with_catch {
     my $success = try {
       die;
@@ -512,6 +510,9 @@ Instead, you should capture the return value:
       # do something with $_
       return undef; #see note
     };
+    return unless $success;
+
+    say "This text WILL NEVER appear!";
   }
 
 Note that if you have a C<catch> block, it must return C<undef> for this to work,
