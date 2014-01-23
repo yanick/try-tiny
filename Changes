@@ -31,47 +31,47 @@ Revision history for Try-Tiny
   - warn loudly on exceptions in finally() blocks
   - dzilify
 
-0.12
+0.12  2013-01-02
   - doc fixes
 
-0.11
+0.11  2011-08-30
   - fix broken dist
 
-0.10
+0.10  2011-04-27
   - clarify some docs
 
-0.09
+0.09  2010-11-28
   - don't index Try::Tiny::ScopeGuard
 
-0.08
+0.08  2010-11-28
   - fix require vs use issue in blead (RT63410)
 
-0.07
+0.07  2010-10-21
   - allow multiple finally blocks
   - pass the error, if any, to finally blocks when called
 
-0.06
+0.06  2010-05-27
   - in t/given_when.t use a plan instead of done_testing for more backwards
     compatibility
 
-0.05
+0.05  2010-05-26
   - Documentation fixes and clarifications
 
-0.04
+0.04  2010-01-22
   - Restore list context propagation for catch blocks
   - Fix a bug where finally blocks weren't always invoked
 
-0.03
+0.03  2010-01-22
   - Support for 'finally' blocks (Andy Yates)
   - More documentation and tests (many people)
   - Sets $@ to the previous value at the beginning of the eval, to allow
     the capture of an error stack when calling die.
 
-0.02
+0.02  2009-09-02
   - Doc fixes from chromatic
   - Various minor fixes from Adam Kennedy
   - Additional documentation and code clarifications
   - 5.005_04 compatibility
 
-0.01
+0.01  2009-08-31
   - Initial release

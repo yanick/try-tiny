@@ -11,7 +11,7 @@ BEGIN {
 	plan tests => 4;
 }
 
-BEGIN { use_ok 'Try::Tiny' }
+use Try::Tiny;
 
 my $name;
 try {
