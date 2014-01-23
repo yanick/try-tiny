@@ -1,6 +1,9 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+  - fix an obscure issue with loading modules during global destruction
+    (ilmari, #11)
+  - documentation updates (anaxagoras, #12)
 
 0.18  2013-08-17
   - fix tests for pre-Test-More-0.88 (Paul Howarth, #10)
