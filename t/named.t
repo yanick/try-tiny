@@ -8,7 +8,7 @@ use Test::More;
 BEGIN {
 	plan skip_all => "Sub::Name required"
 		unless eval { require Sub::Name; 1 };
-	plan tests => 4;
+	plan tests => 3;
 }
 
 use Try::Tiny;
