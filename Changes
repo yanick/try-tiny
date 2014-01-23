@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+
+0.19  2014-01-22
   - fix an obscure issue with loading modules during global destruction
     (ilmari, #11)
   - documentation updates (anaxagoras, #12)
