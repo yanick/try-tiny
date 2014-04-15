@@ -1,6 +1,7 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+  - also skip the test if Capture::Tiny is too old (Martin Popel, #17)
 
 0.20  2014-03-21
   - documentation updates (Flimm, #15)
