@@ -3,8 +3,8 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    plan skip_all => 'Capture::Tiny required'
-        unless eval { require Capture::Tiny 0.12; 1 };
+    plan skip_all => 'Capture::Tiny 0.12 required'
+        unless eval { require Capture::Tiny; Capture::Tiny->VERSION(0.12); 1 };
     plan tests => 3;
     Capture::Tiny->import(qw(capture_stderr));
 }
