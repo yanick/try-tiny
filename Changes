@@ -1,6 +1,8 @@
 Revision history for Try-Tiny
 
 {{$NEXT}}
+
+0.22  2014-04-29
   - add optional test deps as recommended prereqs (Karen Etheridge, #18)
 
 0.21  2014-04-15
