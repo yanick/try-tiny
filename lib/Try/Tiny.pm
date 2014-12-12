@@ -77,7 +77,7 @@ sub try (&;@) {
       $try->();
     };
 
-    return 1; # properly set $fail to false
+    return 1; # properly set $failed to false
   };
 
   # preserve the current error and reset the original value of $@
