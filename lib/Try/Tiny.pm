@@ -217,8 +217,8 @@ context or the empty list in list context. The following examples all
 assign C<"bar"> to C<$x>:
 
   my $x = try { die "foo" } catch { "bar" };
-  my $x = try { die "foo" } || { "bar" };
-  my $x = (try { die "foo" }) // { "bar" };
+  my $x = try { die "foo" } || "bar";
+  my $x = (try { die "foo" }) // "bar";
 
   my $x = eval { die "foo" } || "bar";
 
